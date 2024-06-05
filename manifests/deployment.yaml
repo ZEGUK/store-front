@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-front
+  labels:
+    app: store-front
+    kubernetes.azure.com/generator: devhub
+  namespace: petstore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: store-front
+  template:
+    metadata:
+      labels:
+        app: store-front
+    spec:
+      containers:
+        - name: store-front
+          image: petstoredemo.azurecr.io/image-workflow-1717572638145:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
